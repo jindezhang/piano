@@ -29,7 +29,7 @@ void catch_sig(int sig)
 
 char * init_lcd(struct fb_var_screeninfo *vinfo)
 {
-	int lcd = open("/dev/fb0", O_RDWR);
+	int lcd = open(LCD, O_RDWR);
 
 	bzero(vinfo, sizeof(struct fb_var_screeninfo));
 	ioctl(lcd, FBIOGET_VSCREENINFO, vinfo);
@@ -76,21 +76,21 @@ int main(int argc, char **argv)
 	bzero(FB, vinfo.xres * vinfo.yres * vinfo.bits_per_pixel/8);
 
 	// 显示背景
-	bmp2lcd("./bmp/background.bmp", FB, &vinfo, 0, 0);
+	bmp2lcd(BACKGROUND, FB, &vinfo, 0, 0);
 
 	// 显示琴键
 	int i;
 	for(i=0; i<12; i++)
 	{
-		bmp2lcd("./bmp/key_off.bmp", FB, &vinfo, 65*i + 10, 47);
+		bmp2lcd(KEYOFF, FB, &vinfo, 65*i + 10, 47);
 	}
 
 	// 显示标题栏和钢琴logo
-	bmp2lcd("./bmp/bar.bmp", FB, &vinfo, 0, 0);
-	bmp2lcd("./bmp/logo.bmp", FB, &vinfo, 229, 355);
+	bmp2lcd(BAR,  FB, &vinfo, 0, 0);
+	bmp2lcd(LOGO, FB, &vinfo, 0, 0);
 
 	// 准备触摸屏
-	int ts = open("/dev/event0", O_RDONLY);
+	int ts = open(TOUCH_PANEL, O_RDONLY);
 
 	pthread_t tid;
 	struct coordinate coor;
@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 		{
 			for(i=0; i<12; i++)
 			{
-				bmp2lcd("./bmp/key_off.bmp", FB, &vinfo, 65*i + 10, 47);
+				bmp2lcd(KEYOFF, FB, &vinfo, 65*i + 10, 47);
 			}
 			first_time = true;
 			continue;
@@ -124,10 +124,11 @@ int main(int argc, char **argv)
 		if(new_pos != old_pos || first_time)
 		{
 			// 1，更新琴键状态
-			bmp2lcd("./bmp/key_on.bmp", FB, &vinfo, new_pos, 47);
+			bmp2lcd(KEYON, FB, &vinfo, new_pos, 47);
+
 			if(!first_time)
 			{
-				bmp2lcd("./bmp/key_off.bmp", FB, &vinfo, old_pos, 47);
+				bmp2lcd(KEYOFF, FB, &vinfo, new_pos, 47);
 			}
 			else
 				first_time = false;	

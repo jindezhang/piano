@@ -1,23 +1,24 @@
-vpath %.c = source/
-vpath %.h = inlcude/
+vpath %.c = src/
+vpath %.h = inc/
 
-SRCPATH = ./source
+SRCPATH = ./src
 
-SRC := $(wildcard source/*.c)
+SRC := $(wildcard src/*.c)
 OBJ := $(SRC:%.c=%.o)
-OBJ := $(filter-out source/piano.o, $(OBJ))
+OBJ := $(filter-out src/piano.o, $(OBJ))
 
-CROSS = arm-none-linux-gnueabi
+CROSS = arm-none-linux-gnueabi-
 
-CC = $(CROSS)-gcc
+CC = $(CROSS)gcc
 
-CPPFLAGS += -I ./include
+CPPFLAGS += -Iinc
 #CPPFLAGS += -DDEBUG
 
-LDFLAGS  += -L ./lib
-LDFLAGS  += -lcommon
-LDFLAGS  += -lpthread
-LDFLAGS  += -Wl,-rpath=./lib
+LDFLAGS += -Llib
+LDFLAGS += -lcommon
+LDFLAGS += -lpthread
+LDFLAGS += -Wl,-rpath=./lib
+LDFLAGS += -Wl,-rpath=.
 
 all:piano
 
@@ -29,4 +30,4 @@ clean:
 	$(RM) $(OBJ) piano .*.sw?
 
 distclean:clean
-	$(RM) ./lib/*
+	$(RM) ./lib/* ./src/*.o

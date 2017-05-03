@@ -22,6 +22,9 @@
 #include <strings.h>
 #include <stdio.h>
 
+#define MAD_PLAYER "./bin/madplay"
+#define NOTES_PATH "./res/notes"
+
 extern int vol;
 
 void *play_note(void *arg);

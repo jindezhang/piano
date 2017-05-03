@@ -30,6 +30,14 @@
 #include <sys/mman.h>
 #include <pthread.h>
 
+#define LCD "/dev/fb0"
+
+#define BACKGROUND "./res/bmp/background.bmp"
+#define BAR        "./res/bmp/bar.bmp"
+#define LOGO       "./res/bmp/logo.bmp"
+#define KEYON      "./res/bmp/key_on.bmp"
+#define KEYOFF     "./res/bmp/key_off.bmp"
+
 
 struct bitmap_header
 {
