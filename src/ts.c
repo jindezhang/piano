@@ -16,6 +16,7 @@
 
 #include "ts.h"
 
+
 void ts_trace(int ts, struct coordinate *coor, bool *released)
 {
 	struct input_event buf;
@@ -29,7 +30,7 @@ void ts_trace(int ts, struct coordinate *coor, bool *released)
 		read(ts, &buf, sizeof(buf));
 
 		if(buf.type == EV_ABS &&
-		   buf.code == ABS_PRESSURE &&
+		   buf.code == ABS_Z &&
 		   buf.value == 0)
 		{
 			*released = true;

@@ -31,7 +31,7 @@
 #include <sys/mman.h>
 #include <pthread.h>
 
-#define TOUCH_PANEL "/dev/event0"
+#define TOUCH_PANEL "/dev/input/event0"
 
 struct coordinate
 {

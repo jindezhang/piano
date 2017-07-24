@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 
 	// 显示标题栏和钢琴logo
 	bmp2lcd(BAR,  FB, &vinfo, 0, 0);
-	bmp2lcd(LOGO, FB, &vinfo, 0, 0);
+	bmp2lcd(LOGO, FB, &vinfo, 229, 355);
 
 	// 准备触摸屏
 	int ts = open(TOUCH_PANEL, O_RDONLY);

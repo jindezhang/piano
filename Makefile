@@ -3,6 +3,7 @@ vpath %.h = inc/
 
 SRCPATH = ./src
 
+HEADER := $(wildcard inc/*.h)
 SRC := $(wildcard src/*.c)
 OBJ := $(SRC:%.c=%.o)
 OBJ := $(filter-out src/piano.o, $(OBJ))
@@ -22,7 +23,7 @@ LDFLAGS += -Wl,-rpath=.
 
 all:piano
 
-piano:piano.c
+piano:$(SRC) $(HEADER)
 	$(MAKE) -C $(SRCPATH)
 	$(CC) $^ -o $@ $(CPPFLAGS) $(LDFLAGS)
 
