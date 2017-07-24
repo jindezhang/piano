@@ -26,6 +26,7 @@ all:piano
 piano:$(SRC) $(HEADER)
 	$(MAKE) -C $(SRCPATH)
 	$(CC) $^ -o $@ $(CPPFLAGS) $(LDFLAGS)
+	$(MAKE) -C $(SRCPATH) clean
 
 clean:
 	$(RM) $(OBJ) piano .*.sw?

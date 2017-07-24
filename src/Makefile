@@ -17,3 +17,6 @@ libcommon.so:$(OBJ)
 
 $(OBJ):%.o:%.c
 	$(CC) $< -o $@ $(CPPFLAGS) -c
+	
+clean:
+	$(RM) $(OBJ)
