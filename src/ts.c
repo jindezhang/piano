@@ -29,13 +29,19 @@ void ts_trace(int ts, struct coordinate *coor, bool *released)
 		bzero(&buf, sizeof(buf));
 		read(ts, &buf, sizeof(buf));
 
-		if(buf.type == EV_ABS &&
-		   buf.code == ABS_Z &&
+	
+		// have released the touch-panel
+		if(buf.type == EV_KEY &&
+		   buf.code == BTN_TOUCH &&
 		   buf.value == 0)
 		{
 			*released = true;
 			break;
 		}
+
+
+		if(buf.type != EV_ABS)
+			continue;
 
 		if(buf.type == EV_ABS &&
 		   buf.code == ABS_X)

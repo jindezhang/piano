@@ -9,11 +9,9 @@ CPPFLAGS := -I../inc
 
 OBJ := bmp.o ts.o audio.o
 
-all:libcommon.so
-	mv $^ ../lib
-
 libcommon.so:$(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^
+	mv $@ ../lib
 
 $(OBJ):%.o:%.c
 	$(CC) $< -o $@ $(CPPFLAGS) -c

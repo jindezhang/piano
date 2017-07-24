@@ -9,8 +9,12 @@
 //  Date: 2016-11
 //  
 //  Description: 音乐钢琴
+//
 //  程序调用接口：
-//  ./piano 音量值[0-3] 0: 关闭音量，1：小音量，2：默认音量，3：大音量
+//  ./piano 音量值[0-3] 0: 关闭音量
+//                      1：小音量
+//                      2：默认音量
+//                      3：大音量
 //
 //  GitHub: github.com/vincent040   Bug Report: 2437231462@qq.com
 //
@@ -106,6 +110,8 @@ int main(int argc, char **argv)
 		bool released = false;
 		ts_trace(ts, &coor, &released);
 
+		printf("(%d,%d)\n", coor.x, coor.y);
+
 		if(released)
 		{
 			for(i=0; i<12; i++)
@@ -128,7 +134,7 @@ int main(int argc, char **argv)
 
 			if(!first_time)
 			{
-				bmp2lcd(KEYOFF, FB, &vinfo, new_pos, 47);
+				bmp2lcd(KEYOFF, FB, &vinfo, old_pos, 47);
 			}
 			else
 				first_time = false;	
